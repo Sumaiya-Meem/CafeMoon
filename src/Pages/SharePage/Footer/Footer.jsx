@@ -3,7 +3,7 @@ import { FaTwitter } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 const Footer = () => {
     return (
-        <div>
+        <div className="mt-10">
             <div className="flex flex-col md:flex-row">
                 <div className="flex-1 flex flex-col justify-center items-center p-5 bg-[#003666] text-white">
                      <h1 className="text-xl">CONTACT US</h1>
