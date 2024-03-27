@@ -1,12 +1,13 @@
-import Footer from "../../SharePage/Footer/Footer";
-import Header from "../../SharePage/Header/Header";
+
+import Banner from "../Banner/Banner";
 
 
 const Home = () => {
     return (
         <div>
-            <Header></Header>
-            <Footer></Footer>
+           
+            <Banner></Banner>
+         
         </div>
     );
 };
