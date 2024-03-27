@@ -1,10 +1,11 @@
 import Footer from "../../SharePage/Footer/Footer";
+import Header from "../../SharePage/Header/Header";
 
 
 const Home = () => {
     return (
         <div>
-            <p className="text-center text-xl">This is home</p>
+            <Header></Header>
             <Footer></Footer>
         </div>
     );
