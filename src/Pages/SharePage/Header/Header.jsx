@@ -38,7 +38,7 @@ const Header = () => {
         <Navbar.Link href="/" className="text-white">
           Home
         </Navbar.Link>
-        <Navbar.Link href="#" className="text-white">Contact</Navbar.Link>
+        <Navbar.Link href="/menu" className="text-white">Menu</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
 
