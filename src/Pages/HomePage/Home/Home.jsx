@@ -1,9 +1,11 @@
+import Footer from "../../SharePage/Footer/Footer";
 
 
 const Home = () => {
     return (
         <div>
-            this is home
+            <p className="text-center text-xl">This is home</p>
+            <Footer></Footer>
         </div>
     );
 };
