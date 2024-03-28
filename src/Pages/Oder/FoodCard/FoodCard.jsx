@@ -1,6 +1,8 @@
 import { Card } from "flowbite-react";
 
 const FoodCard = ({items}) => {
+    const {name,image,price,recipe}=items;
+    
     return (
         <div>
     <Card
