@@ -4,7 +4,7 @@ import { Parallax} from 'react-parallax';
 // eslint-disable-next-line react/prop-types
 const Cover = ({img,title,para}) => {
     return (
-        <div>
+        <div className=''>
              <Parallax
         blur={{ min: -30, max: 30 }}
         bgImage={img}

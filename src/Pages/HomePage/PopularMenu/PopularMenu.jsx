@@ -1,7 +1,7 @@
 
 import SectionTitle from "../../SharePage/SectionTitle/SectionTitle";
-import MenuItem from "../../SharePage/menuItem/MenuItem";
 import useMenu from "../../Hooks/useMenu";
+import MenuCategory from "../../SharePage/MenuCategory/MenuCategory";
 
 
 const PopularMenu = () => {
@@ -12,16 +12,7 @@ const PopularMenu = () => {
     return (
         <div className="mt-8">
             <SectionTitle subHeading={"Check it out"} heading={"FROM OUR MENU"}></SectionTitle>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-                {
-                    popular.map(item=>
-                        <MenuItem  key={item._id}
-                        item={item}
-                        ></MenuItem>
-                        )
-                }
-            </div>
+            <MenuCategory items={popular}></MenuCategory>
         </div>
     );
 };
