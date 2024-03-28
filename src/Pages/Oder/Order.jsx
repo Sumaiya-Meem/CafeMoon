@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
 import useMenu from "../Hooks/useMenu";
+import FoodCard from "./FoodCard/FoodCard";
 
 const Order = () => {
   const [menu]=useMenu();
@@ -12,7 +13,8 @@ const Order = () => {
   const dessert=menu.filter(item=>item.category==="dessert");
   const soup=menu.filter(item=>item.category==="soup");
   const salad=menu.filter(item=>item.category==="salad");
-  
+  const pizza=menu.filter(item=>item.category==="pizza");
+
   return (
     <div>
       <Cover img={img} title={"ORDER NOW"} para={""}></Cover>
@@ -23,10 +25,26 @@ const Order = () => {
           <Tab>DESSERT</Tab>
           <Tab>SOUP</Tab>
         </TabList>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+            {
+                salad.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
+            }
+        </TabPanel>
+        <TabPanel>
+        {
+                pizza.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
+            }
+        </TabPanel>
+        <TabPanel>
+        {
+                dessert.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
+            }
+        </TabPanel>
+        <TabPanel>
+        {
+                soup.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
+            }
+        </TabPanel>
       </Tabs>
     </div>
   );
