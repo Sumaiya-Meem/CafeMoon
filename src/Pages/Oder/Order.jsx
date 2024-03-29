@@ -4,7 +4,6 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
 import useMenu from "../Hooks/useMenu";
-import FoodCard from "./FoodCard/FoodCard";
 import OrderCard from "./OrderCard/OrderCard";
 import { useParams } from "react-router-dom";
 
@@ -21,6 +20,7 @@ const Order = () => {
   const soup=menu.filter(item=>item.category==="soup");
   const salad=menu.filter(item=>item.category==="salad");
   const pizza=menu.filter(item=>item.category==="pizza");
+  const popular=menu.filter(item=>item.category==="popular");
 
   return (
     <div>
@@ -31,6 +31,7 @@ const Order = () => {
           <Tab>PIZZA</Tab>
           <Tab>DESSERT</Tab>
           <Tab>SOUP</Tab>
+          <Tab>POPULAR</Tab>
         </TabList>
         <TabPanel>
             <OrderCard items={salad}></OrderCard>
@@ -39,14 +40,13 @@ const Order = () => {
         <OrderCard items={pizza}></OrderCard>
         </TabPanel>
         <TabPanel>
-        {
-                dessert.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
-            }
+        <OrderCard items={dessert}></OrderCard>
         </TabPanel>
         <TabPanel>
-        {
-                soup.map(item => <FoodCard key={item._id} items={item}></FoodCard>)
-            }
+        <OrderCard items={soup}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+        <OrderCard items={popular}></OrderCard>
         </TabPanel>
       </Tabs>
     </div>
