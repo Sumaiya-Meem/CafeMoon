@@ -12,7 +12,7 @@ const PopularMenu = () => {
     return (
         <div className="mt-8">
             <SectionTitle subHeading={"Check it out"} heading={"FROM OUR MENU"}></SectionTitle>
-            <MenuCategory items={popular} title={"Popular item"} img={dessertImg} ></MenuCategory>
+            <MenuCategory items={popular} title={"popular"} img={dessertImg} ></MenuCategory>
         </div>
     );
 };
