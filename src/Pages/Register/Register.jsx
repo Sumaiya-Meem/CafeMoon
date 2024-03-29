@@ -3,15 +3,17 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {Link , useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { ContextProvider } from "../Context/AuthProvider";
+
+import loginImg from "../../assets/others/authentication1.png";
+import bg from "../../assets/others/authentication.png";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import auth from "../firebase/firebase.config";
-import bg from "../../public/bg1.avif";
 
 const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`
 
-const Registration = () => {
+const Register = () => {
 
     const axiosPublic = useAxiosPublic();
     const {createUser} = useContext(ContextProvider);
@@ -76,11 +78,15 @@ const Registration = () => {
     
 
     return (
-        <div className="flex justify-between" style={backgroundImageStyle}>
-            <div className="lg:w-[50%] mx-auto lg:px-0 lg:py-0 px-3  min-h-screen w-full py-5 flex justify-center items-center">
+        <div className="flex justify-between " style={backgroundImageStyle}>
+        <div className="flex shadow-lg mt-28 items-center " >
+        <div className="flex-1">
+          <img src={loginImg} alt="" className="w-[550px] h-[450px]" />
+        </div>
+        <div className="flex-1">
 
-                <form className="bg-white lg:w-[70%]  p-8 shadow-lg rounded-lg" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="text-2xl text-[#008374] font-bold mb-4">Registration Now</h2>
+                <form className="w-full p-8 pb-20 " onSubmit={handleSubmit(onSubmit)}>
+                    <h2 className="text-2xl text-orange-400 font-bold mb-4">Registration Now</h2>
 
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
@@ -133,20 +139,20 @@ const Registration = () => {
                     <div className="flex justify-between">
                         <button
                             type="submit"
-                            className=" w-full bg-[#008374] text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+                            className=" bg-orange-200 w-full rounded-md font-bold px-4 py-2 focus:outline-none focus:shadow-outline-blue"
                         >
                             Sing Up
                         </button>
                     </div>
-                    <h1 className="mt-5">Do You Have Any Account? <Link className="text-[#358b81] font-bold underline" to='/login'>Login</Link></h1>
+                    <h1 className="mt-2">Do You Have Any Account? <Link className="text-[#358b81] font-bold underline" to='/login'>Login</Link></h1>
                 </form>
 
 
             </div>
-
+            </div>
             
         </div>
     );
 };
 
-export default Registration;
+export default Register;

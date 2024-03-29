@@ -1,50 +1,119 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import logo from "../../../assets/logo.png"
+import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import { CiLogin } from "react-icons/ci";
+import { IoIosLogOut } from "react-icons/io";
+import { ContextProvider } from "../../Context/AuthProvider";
 const Header = () => {
+
+  
+  const { logOutUser, user } = useContext(ContextProvider);
+
+
+
+  const handleLogout = () => {
+    logOutUser()
+          .then(() => {
+              toast.success('sign out successfully')
+          })
+        }
+
+  const navItem = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
+        }
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/menu"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
+        }
+      >
+        Menu
+      </NavLink>
+     
+      <NavLink
+        to="order/:category"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
+        }
+      >
+        Order
+      </NavLink>
+     
+     
+    </>
+  );
     return (
         <div>
 
     <Navbar fluid rounded className="fixed bg-black z-10 bg-opacity-30 w-[1024px] text-white">
-      <Navbar.Brand href="/" className="">
-      <div className="flex items-center">
-        <div><img src={logo} alt="" className="w-8 h-8"/></div>
-      <div className="ml-5">
-      <p className="font-serif font-bold ">Cafe Moon</p>
-        <p className="uppercase">Restaurant</p>
-      </div>
-      </div>
-      </Navbar.Brand>
-      <div className="flex md:order-2">
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
-          }
+    <Navbar.Brand href="/">
+          <div className="flex items-center ">
+          <img src={logo} className="mr-3 h-12 w-16" alt="Logo" />
+          <div className="flex flex-col">
+          <h1 className="font-serif text-xl font-bold">CafeMoon</h1>
+          <h3 className="text-[18px] font-bold">Resturant</h3>
+          </div>
+          </div>
+        </Navbar.Brand>
+        <div className="flex md:order-2">
+          {user ? 
+            <>
+            <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+                <Avatar alt="User settings" img={user?.photoURL} rounded />
+            }
         >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown>
-        <Navbar.Toggle />
-      </div>
-      <Navbar.Collapse className="text-white">
-        <Navbar.Link href="/" className="text-white">
-          Home
-        </Navbar.Link>
-        <Navbar.Link href="/menu" className="text-white">Menu</Navbar.Link>
-        <Navbar.Link href="/order/salad" className="text-white">Order</Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
+            <Dropdown.Header>
+                <span className="block text-sm">{ user?.displayName}</span>
+                <span className="block truncate text-sm font-medium">{user?.email}</span>
+            </Dropdown.Header>
+            <Dropdown.Item>
+                <Link to="/dashboard">Dashboard</Link>
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>
+            <Button color="" className=''  onClick={handleLogout}>
+            <span className='mr-2 text-xl'><IoIosLogOut></IoIosLogOut></span> LogOut
+        </Button>
+            </Dropdown.Item>
+        </Dropdown> 
+            </>
+           : (
+            <>
+              <NavLink
+                to="/login"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-[#348f54]"
+                    : "text-white"
+                }
+              >
+                <div className="flex items-center gap-1 font-semibold">
+                  <CiLogin className="text-xl"></CiLogin><p className="text-xl">Login</p>
+                </div>
+              </NavLink>
+            </>
+          )}
 
+          <Navbar.Toggle />
         </div>
-    );
+        <Navbar.Collapse>{navItem}</Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
 };
 
 export default Header;
