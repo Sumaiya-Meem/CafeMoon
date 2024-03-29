@@ -21,7 +21,7 @@ import Order from "../Pages/Oder/Order";
           element:<Menu></Menu>,
         },
         {
-          path: "/order",
+          path: "order/:category",
           element:<Order></Order>,
         },
       ],

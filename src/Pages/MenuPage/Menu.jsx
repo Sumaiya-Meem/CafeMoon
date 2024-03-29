@@ -17,12 +17,9 @@ const Menu = () => {
         <div>
             <Cover img={menuImg} title={"our menu"} para={"Would you like to try a dish?"}></Cover>
             <PopularMenu></PopularMenu>
-            <Cover img={dessertImg} title={"DESSERTS"} para={"Would you like to try our dessert item?"}></Cover>
-            <MenuCategory items={dessert}></MenuCategory>
-            <Cover img={soupImg} title={"SOUP"} para={"Would you like to try our soup item?"}></Cover>
-            <MenuCategory items={soup}></MenuCategory>
-            <Cover img={saladImg} title={"SALAD"} para={"Would you like to try our salad item?"}></Cover>
-            <MenuCategory items={salad}></MenuCategory>
+            <MenuCategory items={dessert} title={"dessert"} img={dessertImg} ></MenuCategory>  
+            <MenuCategory items={soup} title={"soup"} img={soupImg} ></MenuCategory>
+            <MenuCategory items={salad} img={saladImg} title={"salad"}></MenuCategory>
 
         </div>
     );

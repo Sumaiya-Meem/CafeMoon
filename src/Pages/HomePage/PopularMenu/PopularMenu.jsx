@@ -2,7 +2,7 @@
 import SectionTitle from "../../SharePage/SectionTitle/SectionTitle";
 import useMenu from "../../Hooks/useMenu";
 import MenuCategory from "../../SharePage/MenuCategory/MenuCategory";
-
+import dessertImg from "../../../assets/menu/dessert-bg.jpeg"
 
 const PopularMenu = () => {
 
@@ -12,7 +12,7 @@ const PopularMenu = () => {
     return (
         <div className="mt-8">
             <SectionTitle subHeading={"Check it out"} heading={"FROM OUR MENU"}></SectionTitle>
-            <MenuCategory items={popular}></MenuCategory>
+            <MenuCategory items={popular} title={"Popular item"} img={dessertImg} ></MenuCategory>
         </div>
     );
 };
