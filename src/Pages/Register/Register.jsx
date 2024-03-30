@@ -9,6 +9,7 @@ import loginImg from "../../assets/others/authentication1.png";
 import bg from "../../assets/others/authentication.png";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import auth from "../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`
@@ -20,11 +21,7 @@ const Register = () => {
     const navigate = useNavigate()
     
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
     const onSubmit =async (data) => {
@@ -50,12 +47,20 @@ const Register = () => {
                      })
                      .then(()=> {
 
-                        axiosPublic.post('/user', {email: result?.user?.email, name: result?.user?.displayName, role: 'user'})
+                        axiosPublic.post('/user', {email: result?.user?.email, name: result?.user?.displayName})
                         .then(res=> {
-                             if(res.data.acknowledged){
-                                toast.success('user create successfully!')
-                                navigate('/')
-                             }
+                            if (res.data.insertedId) {
+                                console.log('user added to the database')
+                                reset();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'User created successfully.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                navigate('/');
+                            }
                         }) 
                         
                      })

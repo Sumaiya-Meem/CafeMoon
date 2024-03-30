@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { ContextProvider } from "../Context/AuthProvider";
@@ -8,10 +8,14 @@ import { FcGoogle } from "react-icons/fc";
 
 import loginImg from "../../assets/others/authentication1.png";
 import bg from "../../assets/others/authentication.png";
+import Swal from "sweetalert2";
 const Login = () => {
   const { signInUser, signInGoogle } = useContext(ContextProvider);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -23,8 +27,16 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        toast.success("sign in successfully");
-        navigate("/");
+        Swal.fire({
+          title: 'User Login Successful.',
+          showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+          }
+      });
+      navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);

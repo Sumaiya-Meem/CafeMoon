@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { CiLogin } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { ContextProvider } from "../../Context/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+
 const Header = () => {
 
   
@@ -47,6 +49,18 @@ const Header = () => {
       >
         Order
       </NavLink>
+      <NavLink
+        to=""
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
+        }
+      >
+        <div className="btn flex items-center gap-1">
+          <FaShoppingCart className="text-lg"></FaShoppingCart>
+          <p>(+0)</p>
+        </div>
+      </NavLink>
+
      
      
     </>
