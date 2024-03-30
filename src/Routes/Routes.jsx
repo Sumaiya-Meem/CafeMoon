@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Pages/Layout/Dashboard";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import Cart from "../Pages/Dashboard/Cart/Cart";
 
   
  export const router = createBrowserRouter([
@@ -64,10 +66,6 @@ import AdminRoute from "./AdminRoute";
 
         // admin only routes
         {
-          path: 'adminHome',
-          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-        },
-        {
           path: 'addItems',
           element: <AdminRoute><AddItems></AddItems></AdminRoute>
         },
@@ -78,7 +76,7 @@ import AdminRoute from "./AdminRoute";
         {
           path: 'updateItem/:id',
           element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-          loader: ({params}) => fetch(`https://bistro-boss-server-seven-sage.vercel.app/menu/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
         },
         {
           path: 'users',
