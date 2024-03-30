@@ -7,12 +7,12 @@ import { IoIosLogOut } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
 import { useContext } from "react";
-import AuthProvider from "../../Context/AuthProvider";
+import { ContextProvider } from "../../Context/AuthProvider";
 
 const Header = () => {
   const [cart] = useCart();
   
-  const { logOutUser, user } = useContext(AuthProvider);
+  const { logOutUser, user } = useContext(ContextProvider);
 
 
 
@@ -57,8 +57,10 @@ const Header = () => {
         }
       >
                 <button className="btn">
+                    <div className="flex  items-center">
                     <FaShoppingCart className="mr-2"></FaShoppingCart>
-                    <div className="">+{cart.length}</div>
+                    <div className="">(+{cart.length})</div>
+                    </div>
                 </button>
          
       </NavLink>

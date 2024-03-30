@@ -1,11 +1,13 @@
+import { useContext } from "react";
 import { Navigate, useLocation } from "react-router";
-import useAuth from "../Pages/Hooks/useAuth";
+import AuthProvider from "../Pages/Context/AuthProvider";
+
 
 
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children }) => {
-    const { user, loading } = useAuth();
+    const { user, loading } =useContext(AuthProvider);
     const location = useLocation();
 
     if(loading){

@@ -1,51 +1,63 @@
 /* eslint-disable react/prop-types */
 import { Card } from "flowbite-react";
-import useAuth from "../../Hooks/useAuth";
-import toast from "react-hot-toast";
+
+
 import { useLocation, useNavigate } from "react-router-dom";
 
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
+import { useContext } from "react";
+import AuthProvider from "../../Context/AuthProvider";
 
 const FoodCard = ({items}) => {
     const {name,image,price,recipe,_id}=items;
-    const {user}=useAuth();
+    const {user}=useContext(AuthProvider);
     const location=useLocation();
     const navigate=useNavigate();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const [, refetch] = useCart();
 
-    // Add Cart 
-    const handleAddToCart =(food)=>{
-      console.log(food)
-      if(user && user.email){
-        const cartItem={
-          menuId:_id,
-          email:user.email,
-          name,price,image
+    const handleAddToCart = () => {
+        if (user && user.email) {
+            const cartItem = {
+                menuId: _id,
+                email: user.email,
+                name,
+                image,
+                price
+            }
+            axiosSecure.post('/carts', cartItem)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${name} added to your cart`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch();
+                    }
+
+                })
         }
-        axiosPublic.post('/carts',cartItem)
-        .then(res=> {
-          if(res.data.insertedId){
-             toast.success("Add to Cart");
-          }
-         }) 
-      }
-      else{
-        Swal.fire({
-          title: "You are not Logged In",
-          text: "Please login to add to the cart?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, login!"
-      }).then((result) => {
-          if (result.isConfirmed) {
-              navigate('/login', { state: { from: location } })
-          }
-      });
-      }
-
+        else {
+            Swal.fire({
+                title: "You are not Logged In",
+                text: "Please login to add to the cart?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, login!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            });
+        }
     }
 
     return (
