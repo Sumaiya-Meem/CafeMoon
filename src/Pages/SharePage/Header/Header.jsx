@@ -1,17 +1,18 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import logo from "../../../assets/logo.png"
 import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
 import toast from "react-hot-toast";
 import { CiLogin } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { ContextProvider } from "../../Context/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../Hooks/useCart";
+import { useContext } from "react";
+import AuthProvider from "../../Context/AuthProvider";
 
 const Header = () => {
-
+  const [cart] = useCart();
   
-  const { logOutUser, user } = useContext(ContextProvider);
+  const { logOutUser, user } = useContext(AuthProvider);
 
 
 
