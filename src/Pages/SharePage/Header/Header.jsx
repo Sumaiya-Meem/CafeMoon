@@ -50,15 +50,16 @@ const Header = () => {
         Order
       </NavLink>
       <NavLink
-        to=""
+        to="/dashboard/cart"
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
         }
       >
-        <div className="btn flex items-center gap-1">
-          <FaShoppingCart className="text-lg"></FaShoppingCart>
-          <p>(+0)</p>
-        </div>
+                <button className="btn">
+                    <FaShoppingCart className="mr-2"></FaShoppingCart>
+                    <div className="">+{cart.length}</div>
+                </button>
+         
       </NavLink>
 
      
